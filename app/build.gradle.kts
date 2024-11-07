@@ -20,6 +20,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
     }
 
     buildTypes {
@@ -37,6 +38,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
     kotlinOptions {
         jvmTarget = "11"
@@ -53,11 +55,18 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
-    // Retrofit
+    // Network
     implementation(libs.retrofit)
     implementation(libs.moshi.converter)
     implementation(libs.okhttp3)
     implementation(libs.okhttp3.logging.interceptor)
+    implementation(libs.gson)
+    implementation(libs.gson.converter)
+    implementation(libs.coroutine.adapter.factory)
+
+    // Coroutine
+    implementation(libs.coroutines.android)
+    implementation(libs.coroutines.core)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
