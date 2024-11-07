@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.android.ksp)
+    alias(libs.plugins.android.room)
 }
 
 android {
@@ -23,6 +24,11 @@ android {
         buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
     }
 
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
+
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -33,15 +39,15 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
         viewBinding = true
         buildConfig = true
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 }
 
@@ -60,13 +66,16 @@ dependencies {
     implementation(libs.moshi.converter)
     implementation(libs.okhttp3)
     implementation(libs.okhttp3.logging.interceptor)
-    implementation(libs.gson)
     implementation(libs.gson.converter)
     implementation(libs.coroutine.adapter.factory)
 
     // Coroutine
     implementation(libs.coroutines.android)
     implementation(libs.coroutines.core)
+
+    // Room
+    annotationProcessor(libs.room)
+    ksp(libs.room)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
