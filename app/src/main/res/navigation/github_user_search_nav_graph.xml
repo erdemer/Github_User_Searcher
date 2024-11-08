@@ -8,8 +8,22 @@
     <fragment
         android:id="@+id/userSearchFragment"
         android:name="com.example.githubusersearcher.presentation.userSearch.UserSearchFragment"
-        android:label="Your Fragment Label"
+        android:label="UserSearchFragment"
         tools:layout="@layout/fragment_user_search">
+        <action
+            android:id="@+id/action_userSearchFragment_to_userListFragment"
+            app:destination="@id/userListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userListFragment"
+        android:name="com.example.githubusersearcher.presentation.userList.UserListFragment"
+        android:label="UserListFragment"
+        tools:layout="@layout/fragment_user_list">
+        <argument
+            android:name="searchKeyword"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 
 
