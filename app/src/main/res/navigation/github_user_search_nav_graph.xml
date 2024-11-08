@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/github_user_search_nav_graph"
+    app:startDestination="@id/userSearchFragment">
+
+    <fragment
+        android:id="@+id/userSearchFragment"
+        android:name="com.example.githubusersearcher.presentation.userSearch.UserSearchFragment"
+        android:label="Your Fragment Label"
+        tools:layout="@layout/fragment_user_search">
+    </fragment>
+
+
+
+
+
+</navigation>

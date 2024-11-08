@@ -16,6 +16,8 @@ gson-converter = "2.9.0"
 coroutine-adapter-factory = "0.9.2"
 coroutines = "1.8.1"
 room = "2.6.1"
+navigationFragment = "2.8.3"
+androidx-navigation-ui-ktx = "2.2.2"
 
 
 
@@ -38,6 +40,8 @@ coroutine-adapter-factory = { module = "com.jakewharton.retrofit:retrofit2-kotli
 room = { module = "androidx.room:room-compiler", version.ref = "room" }
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigationFragment" }
+androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version = "androidx-navigation-ui-ktx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
