@@ -18,6 +18,8 @@ coroutines = "1.8.1"
 room = "2.6.1"
 navigationFragment = "2.8.3"
 androidx-navigation-ui-ktx = "2.2.2"
+circular-image-view = "3.1.0"
+coil = "2.7.0"
 
 
 
@@ -42,6 +44,8 @@ coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", ve
 coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigationFragment" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version = "androidx-navigation-ui-ktx" }
+circular-image-view = { module = "de.hdodenhof:circleimageview", version.ref = "circular-image-view"}
+coil = { module = "io.coil-kt:coil", version.ref = "coil"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

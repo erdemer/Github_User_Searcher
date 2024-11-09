@@ -80,6 +80,10 @@ dependencies {
     annotationProcessor(libs.room)
     ksp(libs.room)
 
+    //3rd party libs
+    implementation(libs.circular.image.view)
+    implementation(libs.coil)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

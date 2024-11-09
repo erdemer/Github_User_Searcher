@@ -8,11 +8,10 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.githubusersearcher.R
 import com.example.githubusersearcher.common.Constants
 import com.example.githubusersearcher.databinding.FragmentUserSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
-import com.example.githubusersearcher.R
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
