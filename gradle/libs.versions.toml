@@ -40,6 +40,7 @@ gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 gson-converter = { module = "com.squareup.retrofit2:converter-gson", version.ref = "gson-converter" }
 coroutine-adapter-factory = { module = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter", version.ref = "coroutine-adapter-factory"}
 room = { module = "androidx.room:room-compiler", version.ref = "room" }
+room-runtime = {module = "androidx.room:room-ktx", version.ref = "room"}
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigationFragment" }

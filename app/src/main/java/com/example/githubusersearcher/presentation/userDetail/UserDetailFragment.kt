@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import coil.load
 import com.example.githubusersearcher.data.model.detail.UserDetailResponse
 import com.example.githubusersearcher.databinding.FragmentUserDetailBinding
@@ -32,6 +33,9 @@ class UserDetailFragment: Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.toolbarUserDetail.setOnClickListener {
+            findNavController().popBackStack()
+        }
         observeAsEvents(viewModel.state) {
             binding.progressBarDetail.isVisible = it.isLoading
             setUserDetailUI(it.user)
@@ -42,15 +46,21 @@ class UserDetailFragment: Fragment(){
         with(binding) {
             response?.name?.let {
                 tvName.text = context?.getString(R.string.user_detail_name, response.name)
+            } ?: run {
+                tvName.text = context?.getString(R.string.user_detail_name, "-")
             }
             response?.bio?.let {
                 tvBio.text = context?.getString(R.string.user_detail_bio, response.bio)
+            } ?: run {
+                tvBio.text = context?.getString(R.string.user_detail_bio, "-")
             }
             response?.location?.let {
                 tvLocation.text = context?.getString(R.string.user_detail_location, response.location)
+            } ?: run {
+                tvLocation.text = context?.getString(R.string.user_detail_location, "-")
             }
-            ivUserDetailProfileIcon.load(response?.avatarUrl)
 
+            ivUserDetailProfileIcon.load(response?.avatarUrl)
             response?.followers?.let {
                 tvFollowersValue.text = it.toString()
             } ?: run {

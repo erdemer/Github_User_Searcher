@@ -37,6 +37,9 @@ class UserListFragment: Fragment() {
             binding.progressBar.isVisible = it.isLoading
             setAdapter(it.users)
         }
+        binding.fabFavorite.setOnClickListener {
+            findNavController().navigate(R.id.action_userListFragment_to_favoritesFragment)
+        }
     }
 
 
@@ -57,4 +60,3 @@ class UserListFragment: Fragment() {
         binding.rvUsers.adapter = adapter
     }
 }
-

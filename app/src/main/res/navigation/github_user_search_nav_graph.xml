@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_userListFragment_to_userDetailFragment"
             app:destination="@id/userDetailFragment" />
+        <action
+            android:id="@+id/action_userListFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
     </fragment>
 
     <fragment
@@ -43,6 +46,15 @@
             app:argType="boolean"
             android:defaultValue="false" />
     </fragment>
+
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.githubusersearcher.presentation.favorites.FavoritesFragment"
+        android:label="FavoritesFragment"
+        tools:layout="@layout/fragment_favorites">
+    </fragment>
+
 
 
 

@@ -7,4 +7,6 @@
     <string name="follower">Followers</string>
     <string name="following">Following</string>
     <string name="repository">Repository</string>
+    <string name="favorites">Favorites</string>
+    <string name="user_detail">User Detail</string>
 </resources>
