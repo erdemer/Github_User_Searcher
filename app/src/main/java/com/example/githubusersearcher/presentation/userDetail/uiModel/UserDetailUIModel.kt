@@ -10,5 +10,6 @@ data class UserDetailUIModel(
     val publicRepos: Int? = null,
     val avatarUrl: String? = null,
     val favoriteAdditionDate: String? = null,
-    val isFavorite: Boolean = false
+    val isFavorite: Boolean = false,
+    val login: String? = null
 )

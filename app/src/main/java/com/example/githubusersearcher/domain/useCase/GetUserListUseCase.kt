@@ -31,7 +31,7 @@ class GetUserListUseCase @Inject constructor(private val repository: GithubUserR
                 name = item.login,
                 isFavorite = db.any { it.userId == item.id },
                 avatarUrl = item.avatarUrl,
-                timeStamp = db.find { it.userId == item.id }?.timeStamps
+                timeStamp = db.find { it.userId == item.id }?.timeStamps,
             )
         }.orEmpty()
     }

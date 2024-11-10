@@ -5,5 +5,5 @@ data class UserUIModel(
     val name: String? = null,
     var isFavorite: Boolean = false,
     val avatarUrl: String? = null,
-    val timeStamp: Long? = null
+    val timeStamp: Long? = null,
 )

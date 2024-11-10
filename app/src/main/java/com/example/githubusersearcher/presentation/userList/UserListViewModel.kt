@@ -7,8 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.githubusersearcher.common.Constants
 import com.example.githubusersearcher.common.Resource
 import com.example.githubusersearcher.data.local.entity.UserEntity
-import com.example.githubusersearcher.data.model.search.Item
-import com.example.githubusersearcher.data.model.search.SearchResponse
 import com.example.githubusersearcher.domain.useCase.AddUserToFavoritesUseCase
 import com.example.githubusersearcher.domain.useCase.GetUserListUseCase
 import com.example.githubusersearcher.presentation.userList.uiModel.UserUIModel
@@ -30,18 +28,17 @@ class UserListViewModel @Inject constructor(
 
     private val _state = MutableStateFlow(UserListUIState())
     val state: StateFlow<UserListUIState> = _state.asStateFlow()
+    private var recyclerViewItemPosition = 0
 
-    init {
-//        searchKeyword?.let {
-//            getUsers(it)
-//        }
-    }
 
     fun getUsers(searchKeyword: String) {
         getAllUserUseCase(searchKeyword).onEach { result: Resource<List<UserUIModel>> ->
             when (result) {
                 is Resource.Success -> {
-                    _state.value = UserListUIState(users = result.data ?: emptyList())
+                    _state.value = UserListUIState(
+                        users = result.data ?: emptyList(),
+                        recyclerViewItemPosition = recyclerViewItemPosition
+                    )
                 }
 
                 is Resource.Error -> {
@@ -70,5 +67,9 @@ class UserListViewModel @Inject constructor(
                 Log.d("UserListViewModel", "User added to favorites: ${model.name}")
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun keepPosition(position: Int) {
+        recyclerViewItemPosition = position
     }
 }

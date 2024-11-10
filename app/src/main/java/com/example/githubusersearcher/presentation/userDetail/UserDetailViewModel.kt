@@ -7,12 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.githubusersearcher.common.Constants
 import com.example.githubusersearcher.common.Resource
 import com.example.githubusersearcher.data.local.entity.UserEntity
-import com.example.githubusersearcher.data.model.detail.UserDetailResponse
 import com.example.githubusersearcher.domain.useCase.AddUserToFavoritesUseCase
 import com.example.githubusersearcher.domain.useCase.DeleteUserFromFavoritesUseCase
 import com.example.githubusersearcher.domain.useCase.GetUserDetailUseCase
 import com.example.githubusersearcher.presentation.userDetail.uiModel.UserDetailUIModel
-import com.example.githubusersearcher.util.DateUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

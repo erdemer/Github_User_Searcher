@@ -1,7 +1,6 @@
 package com.example.githubusersearcher.presentation.userList
 
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.githubusersearcher.R
 import com.example.githubusersearcher.common.Constants
+import com.example.githubusersearcher.common.error.ErrorDialog
 import com.example.githubusersearcher.databinding.FragmentUserListBinding
 import com.example.githubusersearcher.presentation.userList.uiModel.UserUIModel
 import com.example.githubusersearcher.util.ext.observeAsEvents
@@ -41,7 +41,7 @@ class UserListFragment : Fragment() {
 
     private fun setAdapter(items: List<UserUIModel>) {
         val adapter = UserListAdapter(
-            onClick = { user ->
+            onClick = { user, position ->
                 val bundle = Bundle().apply {
                     putString(Constants.ARG_USER_NAME, user.name)
                 }
@@ -49,6 +49,7 @@ class UserListFragment : Fragment() {
                     R.id.action_userListFragment_to_userDetailFragment,
                     bundle
                 )
+                viewModel.keepPosition(position)
             }, onFavoriteClick = {
                 viewModel.addUserToFavorites(it)
             }
@@ -60,9 +61,13 @@ class UserListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         viewModel.searchKeyword?.let { viewModel.getUsers(it) }
-        observeAsEvents(viewModel.state) {
-            binding.progressBar.isVisible = it.isLoading
-            setAdapter(it.users)
+        observeAsEvents(viewModel.state) { state ->
+            binding.progressBar.isVisible = state.isLoading
+            setAdapter(state.users)
+            binding.rvUsers.scrollToPosition(state.recyclerViewItemPosition)
+            if (state.error.isNotEmpty()) {
+                ErrorDialog().show(childFragmentManager, ErrorDialog.TAG)
+            }
         }
     }
 

@@ -29,7 +29,7 @@ class GetUserDetailUseCase @Inject constructor(private val repository: GithubUse
         val matchingUser = db.find { it.userId == response.id }
         return UserDetailUIModel(
             userId = response.id,
-            name = response.name,
+            name = response.login,
             bio = response.bio,
             location = response.location,
             followers = response.followers,
@@ -41,7 +41,7 @@ class GetUserDetailUseCase @Inject constructor(private val repository: GithubUse
                     it
                 )
             },
-            isFavorite = matchingUser?.isFavorite == true
+            isFavorite = matchingUser?.isFavorite == true,
         )
     }
 }

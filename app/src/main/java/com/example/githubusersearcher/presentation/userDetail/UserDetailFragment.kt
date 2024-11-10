@@ -9,13 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
-import com.example.githubusersearcher.data.model.detail.UserDetailResponse
+import com.example.githubusersearcher.R
+import com.example.githubusersearcher.common.error.ErrorDialog
 import com.example.githubusersearcher.databinding.FragmentUserDetailBinding
+import com.example.githubusersearcher.presentation.userDetail.uiModel.UserDetailUIModel
 import com.example.githubusersearcher.util.ext.observeAsEvents
 import dagger.hilt.android.AndroidEntryPoint
-import com.example.githubusersearcher.R
-import com.example.githubusersearcher.presentation.userDetail.uiModel.UserDetailUIModel
-import com.example.githubusersearcher.presentation.userList.uiModel.UserUIModel
 
 @AndroidEntryPoint
 class UserDetailFragment : Fragment() {
@@ -38,9 +37,12 @@ class UserDetailFragment : Fragment() {
         binding.toolbarUserDetail.setOnClickListener {
             findNavController().popBackStack()
         }
-        observeAsEvents(viewModel.state) {
-            binding.progressBarDetail.isVisible = it.isLoading
-            setUserDetailUI(it.user)
+        observeAsEvents(viewModel.state) { state ->
+            binding.progressBarDetail.isVisible = state.isLoading
+            setUserDetailUI(state.user)
+            if (state.error.isNotEmpty()) {
+                ErrorDialog().show(childFragmentManager, ErrorDialog.TAG)
+            }
         }
     }
 

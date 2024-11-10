@@ -10,4 +10,7 @@
     <string name="favorites">Favorites</string>
     <string name="user_detail">User Detail</string>
     <string name="favorite_date">Date added to favorites: %s</string>
+    <string name="no_data_desc">There is no person that marked as a favorite!</string>
+    <string name="error_msg">Something went wrong!</string>
+    <string name="ok">Ok</string>
 </resources>

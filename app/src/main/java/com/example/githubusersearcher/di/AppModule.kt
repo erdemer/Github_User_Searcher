@@ -1,7 +1,6 @@
 package com.example.githubusersearcher.di
 
 import android.content.Context
-import androidx.room.Room
 import com.example.githubusersearcher.data.local.UserDatabase
 import com.example.githubusersearcher.data.local.dao.UserDao
 import com.example.githubusersearcher.data.remote.NetworkServiceApi

@@ -14,7 +14,7 @@ import com.example.githubusersearcher.R
 
 
 class UserListAdapter(
-    private val onClick: (UserUIModel) -> Unit,
+    private val onClick: (UserUIModel, Int) -> Unit,
     private val onFavoriteClick: (UserUIModel) -> Unit
 ) : ListAdapter<UserUIModel, ItemViewHolder>(ItemDiffCallback()) {
     inner class ItemViewHolder(private val binding: ItemUserListBinding) :
@@ -29,7 +29,7 @@ class UserListAdapter(
             }
 
             binding.root.setOnClickListener {
-                onClick(item)
+                onClick(item, position)
             }
 
             if (position != itemCount - 1) {
