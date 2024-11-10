@@ -14,9 +14,11 @@ import com.example.githubusersearcher.databinding.FragmentUserDetailBinding
 import com.example.githubusersearcher.util.ext.observeAsEvents
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.githubusersearcher.R
+import com.example.githubusersearcher.presentation.userDetail.uiModel.UserDetailUIModel
+import com.example.githubusersearcher.presentation.userList.uiModel.UserUIModel
 
 @AndroidEntryPoint
-class UserDetailFragment: Fragment(){
+class UserDetailFragment : Fragment() {
     private var _binding: FragmentUserDetailBinding? = null
     private val binding get() = _binding!!
 
@@ -27,7 +29,7 @@ class UserDetailFragment: Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentUserDetailBinding.inflate(inflater,container,false)
+        _binding = FragmentUserDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -42,7 +44,30 @@ class UserDetailFragment: Fragment(){
         }
     }
 
-    private fun setUserDetailUI(response: UserDetailResponse?) {
+    private fun setUserDetailUI(response: UserDetailUIModel?) {
+        with(binding) {
+            ivFavorite.setImageResource(
+                if (response?.isFavorite == true) {
+                    R.drawable.baseline_favorite_24
+                } else {
+                    R.drawable.baseline_favorite_border_24
+                }
+            )
+            ivFavorite.setOnClickListener {
+                viewModel.manageFavorite(response)
+            }
+            ivUserDetailProfileIcon.load(response?.avatarUrl)
+            setCardsInfo(response)
+
+            response?.favoriteAdditionDate?.let {
+                tvFavoriteDate.text = context?.getString(R.string.favorite_date, it)
+            } ?: run {
+                tvFavoriteDate.text = context?.getString(R.string.favorite_date, "-")
+            }
+        }
+    }
+
+    private fun setCardsInfo(response: UserDetailUIModel?) {
         with(binding) {
             response?.name?.let {
                 tvName.text = context?.getString(R.string.user_detail_name, response.name)
@@ -55,19 +80,18 @@ class UserDetailFragment: Fragment(){
                 tvBio.text = context?.getString(R.string.user_detail_bio, "-")
             }
             response?.location?.let {
-                tvLocation.text = context?.getString(R.string.user_detail_location, response.location)
+                tvLocation.text =
+                    context?.getString(R.string.user_detail_location, response.location)
             } ?: run {
                 tvLocation.text = context?.getString(R.string.user_detail_location, "-")
             }
-
-            ivUserDetailProfileIcon.load(response?.avatarUrl)
             response?.followers?.let {
                 tvFollowersValue.text = it.toString()
             } ?: run {
                 tvFollowersValue.text = "0"
             }
             response?.following?.let {
-               tvFollowingValue.text = it.toString()
+                tvFollowingValue.text = it.toString()
             } ?: run {
                 tvFollowingValue.text = "0"
             }

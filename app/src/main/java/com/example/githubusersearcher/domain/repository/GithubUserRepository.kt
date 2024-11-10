@@ -9,4 +9,5 @@ interface GithubUserRepository {
     suspend fun getUserDetail(userName: String): UserDetailResponse
     suspend fun addUserToFavorite(userEntity: UserEntity)
     suspend fun getAllFavoriteUser(): List<UserEntity>
+    suspend fun deleteUserFromFavorites(userId: Long)
 }

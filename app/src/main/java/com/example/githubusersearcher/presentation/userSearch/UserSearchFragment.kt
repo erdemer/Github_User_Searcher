@@ -36,7 +36,6 @@ class UserSearchFragment: Fragment() {
         binding.svGithubUser.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
-                    println("Submitted query: $it")
                     val bundle = Bundle().apply {
                         putString(Constants.ARG_SEARCH_KEYWORD, it)
                     }
@@ -49,6 +48,10 @@ class UserSearchFragment: Fragment() {
                 return true
             }
         })
+
+        binding.fabFavorite.setOnClickListener {
+            findNavController().navigate(R.id.action_userSearchFragment_to_favoritesFragment)
+        }
     }
 
     /**

@@ -1,9 +1,9 @@
 package com.example.githubusersearcher.presentation.userDetail
 
-import com.example.githubusersearcher.data.model.detail.UserDetailResponse
+import com.example.githubusersearcher.presentation.userDetail.uiModel.UserDetailUIModel
 
 data class UserDetailState(
     val isLoading: Boolean = false,
-    val user: UserDetailResponse? = null,
+    val user: UserDetailUIModel? = null,
     val error: String = ""
 )

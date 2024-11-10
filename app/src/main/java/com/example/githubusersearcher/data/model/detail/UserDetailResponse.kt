@@ -26,7 +26,7 @@ data class UserDetailResponse(
     val hireable: Any,
     @SerializedName("html_url")
     val htmlUrl: String? = null,
-    val id: Int? = null,
+    val id: Long? = null,
     val location: String? = null,
     val login: String? = null,
     val name: String? = null,

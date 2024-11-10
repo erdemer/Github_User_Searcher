@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_userSearchFragment_to_userListFragment"
             app:destination="@id/userListFragment" />
+        <action
+            android:id="@+id/action_userSearchFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
     </fragment>
 
     <fragment
@@ -41,10 +44,6 @@
             android:name="userName"
             app:argType="string"
             app:nullable="true" />
-        <argument
-            android:name="isFavorite"
-            app:argType="boolean"
-            android:defaultValue="false" />
     </fragment>
 
 

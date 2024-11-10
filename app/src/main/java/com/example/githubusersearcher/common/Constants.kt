@@ -4,4 +4,5 @@ object Constants {
     const val ARG_SEARCH_KEYWORD = "searchKeyword"
     const val ARG_USER_NAME = "userName"
     const val ARG_IS_FAVORITE = "isFavorite"
+    const val ARG_FAVORITE_ADDITION_DATE = "favoriteAdditionDate"
 }

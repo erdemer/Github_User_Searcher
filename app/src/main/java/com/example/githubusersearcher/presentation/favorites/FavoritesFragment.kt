@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.githubusersearcher.databinding.FragmentFavoritesBinding
+import com.example.githubusersearcher.presentation.userList.UserListAdapter
+import com.example.githubusersearcher.presentation.userList.uiModel.UserUIModel
+import com.example.githubusersearcher.util.ext.observeAsEvents
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,6 +34,16 @@ class FavoritesFragment: Fragment() {
         binding.toolbarFavorite.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
+        observeAsEvents(viewModel.state) {
+            binding.progressBarFavorites.visibility = if (it.isLoading) View.VISIBLE else View.GONE
+            setAdapter(it.users)
+        }
+    }
+
+    private fun setAdapter(models: List<UserUIModel>) {
+        val adapter = UserListAdapter(onClick = {}, onFavoriteClick = {})
+        adapter.submitList(models)
+        binding.rvFavorites.adapter = adapter
     }
 
     override fun onDestroy() {

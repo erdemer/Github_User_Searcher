@@ -7,26 +7,40 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.githubusersearcher.data.model.search.Item
 import com.example.githubusersearcher.databinding.ItemUserListBinding
 import com.example.githubusersearcher.presentation.userList.UserListAdapter.ItemViewHolder
+import com.example.githubusersearcher.presentation.userList.uiModel.UserUIModel
+import com.example.githubusersearcher.R
 
 
-class UserListAdapter(private val onClick: (String) -> Unit) : ListAdapter<Item, ItemViewHolder>(ItemDiffCallback()) {
+class UserListAdapter(
+    private val onClick: (UserUIModel) -> Unit,
+    private val onFavoriteClick: (UserUIModel) -> Unit
+) : ListAdapter<UserUIModel, ItemViewHolder>(ItemDiffCallback()) {
     inner class ItemViewHolder(private val binding: ItemUserListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Item, position: Int) {
-            binding.tvProfileName.text = item.login
+        fun bind(item: UserUIModel, position: Int) {
+            binding.tvProfileName.text = item.name
             binding.ivProfilePic.load(item.avatarUrl)
+            if (!item.isFavorite) {
+                binding.ivFavorite.setImageResource(R.drawable.baseline_favorite_border_24)
+            } else {
+                binding.ivFavorite.setImageResource(R.drawable.baseline_favorite_24)
+            }
 
             binding.root.setOnClickListener {
-                onClick(item.login)
+                onClick(item)
             }
 
             if (position != itemCount - 1) {
                 binding.divider.visibility = View.VISIBLE
             } else {
                 binding.divider.visibility = View.GONE
+            }
+            binding.ivFavorite.setOnClickListener {
+                item.isFavorite = !item.isFavorite
+                onFavoriteClick(item)
+                notifyItemChanged(position)
             }
         }
     }
@@ -47,12 +61,12 @@ class UserListAdapter(private val onClick: (String) -> Unit) : ListAdapter<Item,
     }
 }
 
-class ItemDiffCallback : DiffUtil.ItemCallback<Item>() {
-    override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
-        return oldItem.id == newItem.id
+class ItemDiffCallback : DiffUtil.ItemCallback<UserUIModel>() {
+    override fun areItemsTheSame(oldItem: UserUIModel, newItem: UserUIModel): Boolean {
+        return oldItem.userId == newItem.userId
     }
 
-    override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
+    override fun areContentsTheSame(oldItem: UserUIModel, newItem: UserUIModel): Boolean {
         return oldItem == newItem
     }
 }

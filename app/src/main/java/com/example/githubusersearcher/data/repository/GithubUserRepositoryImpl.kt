@@ -14,4 +14,5 @@ class GithubUserRepositoryImpl @Inject constructor(private val api: NetworkServi
     override suspend fun getUserDetail(userName: String): UserDetailResponse = api.getDetailUser(userName)
     override suspend fun addUserToFavorite(userEntity: UserEntity) = userDao.insertUser(userEntity)
     override suspend fun getAllFavoriteUser(): List<UserEntity> = userDao.getAllUsers()
+    override suspend fun deleteUserFromFavorites(userId: Long) = userDao.deleteUser(userId)
 }
