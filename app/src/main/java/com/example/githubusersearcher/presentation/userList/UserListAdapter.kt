@@ -12,11 +12,16 @@ import com.example.githubusersearcher.databinding.ItemUserListBinding
 import com.example.githubusersearcher.presentation.userList.UserListAdapter.ItemViewHolder
 
 
-class UserListAdapter: ListAdapter<Item, ItemViewHolder>(ItemDiffCallback()) {
-    inner class ItemViewHolder(private val binding: ItemUserListBinding) : RecyclerView.ViewHolder(binding.root) {
+class UserListAdapter(private val onClick: (String) -> Unit) : ListAdapter<Item, ItemViewHolder>(ItemDiffCallback()) {
+    inner class ItemViewHolder(private val binding: ItemUserListBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Item, position: Int) {
             binding.tvProfileName.text = item.login
             binding.ivProfilePic.load(item.avatarUrl)
+
+            binding.root.setOnClickListener {
+                onClick(item.login)
+            }
 
             if (position != itemCount - 1) {
                 binding.divider.visibility = View.VISIBLE
@@ -31,7 +36,8 @@ class UserListAdapter: ListAdapter<Item, ItemViewHolder>(ItemDiffCallback()) {
         parent: ViewGroup,
         viewType: Int
     ): ItemViewHolder {
-        val binding = ItemUserListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemUserListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ItemViewHolder(binding)
     }
 
@@ -41,7 +47,7 @@ class UserListAdapter: ListAdapter<Item, ItemViewHolder>(ItemDiffCallback()) {
     }
 }
 
-    class ItemDiffCallback : DiffUtil.ItemCallback<Item>() {
+class ItemDiffCallback : DiffUtil.ItemCallback<Item>() {
     override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
         return oldItem.id == newItem.id
     }

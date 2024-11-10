@@ -1,12 +1,12 @@
-package com.example.githubusersearcher.presentation.userList
+package com.example.githubusersearcher.presentation.userDetail
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.githubusersearcher.common.Constants
 import com.example.githubusersearcher.common.Resource
-import com.example.githubusersearcher.data.model.search.SearchResponse
-import com.example.githubusersearcher.domain.useCase.GetUserListUseCase
+import com.example.githubusersearcher.data.model.detail.UserDetailResponse
+import com.example.githubusersearcher.domain.useCase.GetUserDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,34 +16,35 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
-class UserListViewModel @Inject constructor(
+class UserDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val useCase: GetUserListUseCase
+    private val userDetailUseCase: GetUserDetailUseCase
 ) : ViewModel() {
-    private val searchKeyword = savedStateHandle.get<String>(Constants.ARG_SEARCH_KEYWORD)
+    private val userName = savedStateHandle.get<String>(Constants.ARG_USER_NAME)
+    val isFavorite = savedStateHandle.get<Boolean>(Constants.ARG_IS_FAVORITE)
 
-    private val _state = MutableStateFlow(UserListUIState())
-    val state: StateFlow<UserListUIState> = _state.asStateFlow()
+    private val _state = MutableStateFlow(UserDetailState())
+    val state: StateFlow<UserDetailState> = _state.asStateFlow()
 
     init {
-        searchKeyword?.let {
-            getUsers(it)
+        userName?.let {
+            getUserDetail(it)
         }
     }
 
-    private fun getUsers(searchKeyword: String) {
-        useCase(searchKeyword).onEach { result: Resource<SearchResponse> ->
+    private fun getUserDetail(userName: String) {
+        userDetailUseCase(userName).onEach { result: Resource<UserDetailResponse> ->
             when(result) {
                 is Resource.Success -> {
-                    _state.value = UserListUIState(users = result.data?.items ?: emptyList())
+                    _state.value = UserDetailState(user = result.data)
                 }
                 is Resource.Error -> {
-                    _state.value = UserListUIState(
+                    _state.value = UserDetailState(
                         error = result.message ?: "An unexpected error occured"
                     )
                 }
                 is Resource.Loading -> {
-                    _state.value = UserListUIState(isLoading = true)
+                    _state.value = UserDetailState(isLoading = true)
                 }
             }
         }.launchIn(viewModelScope)

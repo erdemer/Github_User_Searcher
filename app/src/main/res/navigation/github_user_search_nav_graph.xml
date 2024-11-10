@@ -24,7 +24,26 @@
             android:name="searchKeyword"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_userListFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="com.example.githubusersearcher.presentation.userDetail.UserDetailFragment"
+        android:label="UserDetailFragment"
+        tools:layout="@layout/fragment_user_detail">
+        <argument
+            android:name="userName"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="isFavorite"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
+
 
 
 

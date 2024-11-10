@@ -1,7 +1,10 @@
 package com.example.githubusersearcher.data.remote
 
+import com.example.githubusersearcher.data.model.detail.UserDetailResponse
 import com.example.githubusersearcher.data.model.search.SearchResponse
+import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface NetworkServiceApi {
@@ -23,6 +26,18 @@ interface NetworkServiceApi {
     suspend fun getSearchUser(
         @Query("q") q : String
     ) : SearchResponse
+
+
+    /**
+     * Retrieves detailed information about a specific GitHub user.
+     *
+     * @param username The username of the GitHub user to retrieve details for.
+     * @return A [UserDetailResponse] object containing the user's detailed information.
+     */
+    @GET("users/{username}")
+    suspend fun getDetailUser(
+        @Path("username") username: String
+    ) : UserDetailResponse
 
 
 }
