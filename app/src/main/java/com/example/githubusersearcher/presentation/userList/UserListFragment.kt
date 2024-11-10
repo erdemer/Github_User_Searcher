@@ -37,6 +37,9 @@ class UserListFragment : Fragment() {
         binding.fabFavorite.setOnClickListener {
             findNavController().navigate(R.id.action_userListFragment_to_favoritesFragment)
         }
+        binding.toolbarUserList.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun setAdapter(items: List<UserUIModel>) {

@@ -10,7 +10,6 @@ class ErrorDialog: DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         AlertDialog.Builder(requireContext())
             .setMessage(getString(R.string.error_msg))
-            .setIcon(R.drawable.ic_error)
             .setPositiveButton(getString(R.string.ok)) { _, _ ->
                 dismiss()
             }
