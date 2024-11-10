@@ -32,3 +32,6 @@ This project utilizes the following technologies and libraries:
 	•	Search for Users: Enter a GitHub username to search for users.
 	•	View User Details: Select a user from the list to see more details.
 	•	Mark as Favorite: Use the favorite icon to mark/unmark users. This status will persist between the list and detail pages.
+
+ ## Screen Shots
+<img src="https://github.com/user-attachments/assets/04ef620a-093e-4dae-b923-d693a1b13aca" width="200"/><img src="https://github.com/user-attachments/assets/8e7bbaf6-ab8b-4620-9976-f1fbee3c45dd" width="200"/><img src="https://github.com/user-attachments/assets/1d250173-c0f8-410d-b84b-6d755b80f881" width="200"/>
